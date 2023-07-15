@@ -29,7 +29,7 @@ let load = (data) => {
   let timezoneHTML = document.getElementById("timezone")
 
   let latitudeVar = data["latitude"];
-  let latitudeTML = document.getElementById("latitude")
+  let latitudeHTML = document.getElementById("latitude")
 
   let longitudeVar = data["longitude"];
   let longitudeHTML = document.getElementById("longitude")
@@ -38,7 +38,7 @@ let load = (data) => {
   let elevationHTML = document.getElementById("elevation")
 
   timezoneHTML.textContent = timezoneVar
-  latitudeTML.textContent = latitudeVar
+  latitudeHTML.textContent = latitudeVar
   longitudeHTML.textContent = longitudeVar
   elevationHTML.textContent = elevationVar
   console.log(data);

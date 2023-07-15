@@ -36,9 +36,13 @@ let load = (data) => {
   let longitudeVar = data["longitude"];
   let longitudeHTML = document.getElementById("longitude")
 
+  let elevationVar = data["elevation"];
+  let elevationHTML = document.getElementById("elevation")
+
   timezoneHTML.textContent = timezoneVar
   latitudeTML.textContent = latitudeVar
   longitudeHTML.textContent = longitudeVar
+  elevationHTML.textContent = elevationVar
   console.log(data);
 
   plot(data);
@@ -52,15 +56,20 @@ let load = (data) => {
     .then(response => response.text())
     .then(data => {
       const parser = new DOMParser();
-      const xml = parser.parseFromString(data, "text/xml");
-      let contenedorMareas = xml.getElementsByClassName('container-fluid')[0];
+      const xmlDoc = parser.parseFromString(data, 'text/html');
       let contenedorHTML = document.getElementById('table-container');
-      contenedorHTML.innerHTML = contenedorMareas.innerHTML;
-      console.log();
+      
+      let rowElements = xmlDoc.getElementsByClassName('row');
+      let filteredRows = [rowElements[0], rowElements[1]];  // Filtrar los primeros dos elementos row
+      
+      let filteredHTML = Array.from(filteredRows)
+        .map(row => row.outerHTML)
+        .join('');
+
+      contenedorHTML.innerHTML = filteredHTML;
     })
     .catch(console.error);
 };
-
 
   (
     function () {
